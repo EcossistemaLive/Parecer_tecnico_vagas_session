@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parecer Técnico - Live Consultoria V6.0</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* 1. VARIÁVEIS DO SISTEMA DE DESIGN V6.0 */
+        :root {
+            --live-deep: #06192a;
+            --live-glass: rgba(10, 36, 61, 0.70);
+            --live-glass-hover: rgba(15, 45, 75, 0.85);
+            --glass-blur: blur(16px) saturate(180%);
+            --live-accent: #00e800;
+            --live-accent-dim: rgba(0, 232, 0, 0.15);
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-active: rgba(0, 232, 0, 0.4);
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+        }
+
+        /* 2. RESET & BASE GLOBAL */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--live-deep);
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+            background-attachment: fixed; /* Mantém a textura fixa durante a rolagem */
+            color: var(--text-primary);
+            font-family: 'Merriweather', serif;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* 3. TIPOGRAFIA */
+        h1, h2, h3, h4, .number, th, .font-poppins {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        p, li, td, .subtitle, .contact-info {
+            color: var(--text-secondary);
+        }
+
+        /* 4. LAYOUT DA PÁGINA (ROLAGEM VERTICAL) */
+        .page-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 20px 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 80px;
+        }
+
+        /* 5. COMPONENTES REUTILIZÁVEIS */
+        .glass-panel {
+            background-color: var(--live-glass);
+            backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 50px;
+        }
+
+        .section-title {
+            font-size: 36px;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title::before {
+            content: '';
+            display: block;
+            width: 8px;
+            height: 36px;
+            background-color: var(--live-accent);
+            border-radius: 4px;
+        }
+
+        .subsection-title {
+            font-size: 24px;
+            margin: 40px 0 20px;
+            color: var(--live-accent);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        /* 6. SEÇÕES ESPECÍFICAS */
+        
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            padding: 80px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--live-accent-dim) 0%, transparent 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .hero-section > * { position: relative; z-index: 1; }
+
+        .live-logo {
+            height: 60px;
+            margin-bottom: 30px;
+            object-fit: contain;
+        }
+
+        .hero-title {
+            font-size: 64px;
+            background: linear-gradient(90deg, #ffffff 0%, #cccccc 50%, #00e800 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+            margin-bottom: 15px;
+        }
+
+        .hero-subtitle { font-size: 22px; }
+
+        /* Divider Text */
+        .text-divider {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .text-divider hr {
+            background-color: var(--live-accent);
+            border: none;
+            height: 4px;
+            width: 80px;
+            margin: 0 auto 30px;
+            border-radius: 2px;
+        }
+
+        .text-divider h2 { font-size: 48px; margin-bottom: 20px; }
+        .text-divider p { font-size: 22px; }
+
+        /* Tiles */
+        .tile {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .tile .icon {
+            color: var(--live-accent);
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .tile h3 { font-size: 22px; }
+
+        /* Bleed Panel (Imagem com Texto) */
+        .bleed-panel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding: 0;
+            overflow: hidden;
+            align-items: stretch;
+        }
+
+        .bleed-text {
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .bleed-text h3 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: var(--live-accent);
+        }
+
+        .bleed-text p { font-size: 18px; margin-bottom: 15px; }
+
+        .bleed-image {
+            width: 100%;
+            height: 100%;
+            min-height: 350px;
+            object-fit: cover;
+        }
+
+        /* Highlight Numbers */
+        .highlight-card {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .highlight-number-wrapper {
+            flex: 0 0 30%;
+            text-align: center;
+            border-right: 1px solid var(--border-subtle);
+            padding-right: 40px;
+        }
+
+        .highlight-number {
+            font-size: 100px;
+            color: var(--live-accent);
+            line-height: 1;
+        }
+
+        .highlight-label {
+            font-size: 20px;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        .highlight-content h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: var(--live-accent);
+        }
+
+        .highlight-content p { font-size: 18px; }
+
+        /* Chart */
+        .chart-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .chart-row:last-child { margin-bottom: 0; }
+
+        .chart-label {
+            flex: 0 0 180px;
+            text-align: right;
+            font-size: 18px;
+        }
+
+        .chart-bar-bg {
+            flex-grow: 1;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            height: 44px;
+            overflow: hidden;
+        }
+
+        .chart-bar-fill {
+            background-color: var(--live-accent);
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 15px;
+            color: var(--live-deep);
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .chart-summary {
+            margin-top: 30px;
+            text-align: center;
+            font-style: italic;
+        }
+
+        /* Footer */
+        .footer-section {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        /* RESPONSIVIDADE */
+        @media (max-width: 900px) {
+            .bleed-panel { grid-template-columns: 1fr; }
+            .bleed-image { height: 300px; order: -1; }
+            .highlight-card { flex-direction: column; text-align: center; }
+            .highlight-number-wrapper { border-right: none; border-bottom: 1px solid var(--border-subtle); padding-right: 0; padding-bottom: 30px; margin-bottom: 10px; width: 100%; }
+            .chart-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .chart-label { text-align: left; flex: none; }
+            .chart-bar-bg { width: 100%; }
+            .hero-title { font-size: 48px; }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="page-wrapper">
+        
+        <!-- HEADER / HERO -->
+        <header class="glass-panel hero-section">
+            <img src="https://raw.githubusercontent.com/Clebito2/ConsultoriaLive/main/Logo%20live%20oficial-21.png" alt="Live Consultoria Logo" class="live-logo">
+            <h1 class="hero-title">Parecer Técnico R&S</h1>
+            <p class="hero-subtitle">Session Skate bar - Moto GP Goiânia<br>Inteligência Analítica V6.0</p>
+        </header>
+
+        <!-- INTRO DIVIDER -->
+        <div class="text-divider">
+            <hr>
+            <h2 class="font-poppins">Visão Geral do Projeto</h2>
+            <p>Diagnóstico de Cenário e Estratégia de Contratação. "A perfeição está nos detalhes invisíveis."</p>
+        </div>
+
+        <!-- DEMANDAS -->
+        <section>
+            <h2 class="section-title">Demandas Estratégicas</h2>
+            <div class="grid-3">
+                <div class="glass-panel tile">
+                    <div class="icon"><i class="fa-solid fa-chess-knight"></i></div>
+                    <h3 class="font-poppins">Gerência</h3>
+                    <p>O foco central está na liderança tática de salão e gestão de conflitos durante os picos operacionais, mantendo o controle total da equipe e do estoque.</p>
+                </div>
+                <div class="glass-panel tile">
+                    <div class="icon"><i class="fa-solid fa-comments-dollar"></i></div>
+                    <h3 class="font-poppins">Caixa & Atendimento</h3>
+                    <p>Necessidade crítica e eliminatória: fluência no idioma Inglês para atendimento do público internacional do Moto GP, unida à agilidade extrema.</p>
+                </div>
+                <div class="glass-panel tile">
+                    <div class="icon"><i class="fa-solid fa-fire-burner"></i></div>
+                    <h3 class="font-poppins">Auxiliar de Cozinha</h3>
+                    <p>A prioridade técnica é a resistência física e a capacidade de processamento veloz no preparo em alto volume sob condições de alta pressão.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- GERÊNCIA -->
+        <section>
+            <h2 class="section-title">Análise: Gerência</h2>
+            
+            <!-- Top 1 Gerência -->
+            <div class="glass-panel bleed-panel mb-40">
+                <div class="bleed-text">
+                    <h3 class="font-poppins">#1 Murilo de Paiva Peixoto</h3>
+                    <p>Com mais de 12 anos de densa experiência, o perfil se destaca pelo foco agressivo em resultados e desenvolvimento de pessoas em operações complexas.</p>
+                    <p>Sua capacidade de liderança foi forjada na gestão comprovada de times com até 31 colaboradores, garantindo a resiliência exata que o evento exige.</p>
+                </div>
+                <img class="bleed-image" src="https://images.unsplash.com/photo-1574096079513-d8259312b785?q=80&w=1200&auto=format&fit=crop" alt="Profissional organizando o bar com postura de liderança">
+            </div>
+
+            <!-- Alternativas Gerência -->
+            <h3 class="subsection-title">Concorrentes - Liderança Tática</h3>
+            <div class="grid-2">
+                <div class="glass-panel tile">
+                    <h3 class="font-poppins">Iara Alves Sevilha</h3>
+                    <p>Perfil operacional tático com profunda bagagem no segmento de bares e pubs (Folks Pub, Pop Coffe). Conhece a trincheira de atendimento como Barista Chefe e Bartender, além de ter exercido Gerência direta (Cafe e Prosa). Excelente Fit Cultural para o Session Skate bar.</p>
+                </div>
+                <div class="glass-panel tile">
+                    <h3 class="font-poppins">Rafael Prado Guimarães</h3>
+                    <p>Sólida e ininterrupta experiência em Alimentos e Bebidas (F&B). Atuação robusta como Maitre em parrillas e restaurantes renomados, aliada à atual posição de Gerência (Detroit Steakhouse). Domina o controle de estoque e fluxo de salão.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CAIXA & SALÃO -->
+        <section>
+            <h2 class="section-title">Análise: Frente de Caixa & Salão</h2>
+            
+            <!-- Top 1 Caixa -->
+            <div class="glass-panel highlight-card">
+                <div class="highlight-number-wrapper">
+                    <div class="highlight-number font-poppins">C2</div>
+                    <div class="highlight-label font-poppins text-primary">Inglês Proficiente</div>
+                </div>
+                <div class="highlight-content">
+                    <h3 class="font-poppins">#1 João Victor Moreira Lopes</h3>
+                    <p>Este perfil entrega o <strong>Match perfeito e direto</strong> para a exigência eliminatória do cliente. Sua proficiência C2 atende cirurgicamente o público internacional. Além do idioma, a recente experiência como Barista comprova sua desenvoltura técnica em balcão, caixa e contato sob demanda.</p>
+                </div>
+            </div>
+
+            <!-- Alternativas Caixa/Atendimento -->
+            <h3 class="subsection-title">Alternativas e Backup de Salão</h3>
+            <div class="grid-2">
+                <div class="glass-panel tile">
+                    <h3 class="font-poppins">Camila de Souza Manoel</h3>
+                    <p>A mais forte segunda opção para Caixa. Possui Inglês Avançado e uma trajetória robusta e validada como Chefe de Salão e Atendente em grandes nomes (Outback, Cão Véio). Traz excelência no serviço premium ao cliente final.</p>
+                </div>
+                <div class="glass-panel tile">
+                    <h3 class="font-poppins">Sthefany Cristine</h3>
+                    <p>Indicação tática para a função de Atendente Padrão. A experiência cruzada (Caixa e Vendas) demonstra um perfil comunicativo, proativo e com alto grau de organização sistêmica, ideal para bater metas diárias no evento.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- COZINHA -->
+        <section>
+            <h2 class="section-title">Análise: Retaguarda (Cozinha)</h2>
+            
+            <!-- Top 1 Cozinha -->
+            <div class="glass-panel bleed-panel">
+                <img class="bleed-image" src="https://images.unsplash.com/photo-1556910103-1c02745a872f?q=80&w=1200&auto=format&fit=crop" alt="Cozinha comercial em alto volume de operação e preparo">
+                <div class="bleed-text">
+                    <h3 class="font-poppins">#1 Jéssica Karla da Cruz</h3>
+                    <p>O perfil "Mão na Massa" mais extremo e consistente da base. Apresenta uma impressionante e inquestionável estabilidade de 10 anos na mesma operação (Guga Lanche).</p>
+                    <p>Seu repertório abrange chapa, manipulação de alimentos (Pasteira) e atuação na ponta. É a escolha de menor risco para suportar jornadas exaustivas de 12 horas.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCORE TÉCNICO -->
+        <section>
+            <h2 class="section-title">Score Ponderado: Gestão (Protocolo STAR)</h2>
+            <div class="glass-panel">
+                <div class="chart-row">
+                    <div class="chart-label font-poppins">Murilo Peixoto</div>
+                    <div class="chart-bar-bg">
+                        <div class="chart-bar-fill font-poppins" style="width: 92%;">92%</div>
+                    </div>
+                </div>
+                <div class="chart-row">
+                    <div class="chart-label font-poppins">Iara Sevilha</div>
+                    <div class="chart-bar-bg">
+                        <div class="chart-bar-fill font-poppins" style="width: 88%;">88%</div>
+                    </div>
+                </div>
+                <div class="chart-row">
+                    <div class="chart-label font-poppins">Rafael Prado</div>
+                    <div class="chart-bar-bg">
+                        <div class="chart-bar-fill font-poppins" style="width: 85%;">85%</div>
+                    </div>
+                </div>
+                <p class="chart-summary">A avaliação do Score leva em consideração a profundidade da trajetória, o peso das entregas (Situação, Tarefa, Ação, Resultado) e a compatibilidade do perfil comportamental com um bar noturno/skate park em dias de extrema saturação de público.</p>
+            </div>
+        </section>
+
+        <!-- FOOTER / Q&A -->
+        <footer class="footer-section">
+            <h2 class="font-poppins" style="font-size: 36px; margin-bottom: 20px;">Parecer Finalizado</h2>
+            <p style="font-size: 18px; max-width: 600px; margin: 0 auto;">A base de candidatos foi auditada com sucesso. Aguardamos a validação tática para iniciarmos os agendamentos das entrevistas finais (Cultural Fit).</p>
+            <div class="contact-info" style="margin-top: 40px;">
+                <p class="font-poppins" style="margin-bottom: 5px;">&copy; Powered by Cléber Donato</p>
+                <a href="mailto:cleberdonato@ecossistemalive.com.br" style="color: var(--live-accent); text-decoration: none; font-weight: 600;">cleberdonato@ecossistemalive.com.br</a>
+            </div>
+        </footer>
+
+    </main>
+
+</body>
+</html>
+```
