@@ -105,6 +105,27 @@
             gap: 30px;
         }
 
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background-color: var(--live-accent);
+            color: var(--live-deep);
+            padding: 15px 35px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 18px;
+            margin-top: 30px;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #00ff00;
+            transform: translateY(-2px);
+        }
+
         /* 6. SEÇÕES ESPECÍFICAS */
         
         /* Hero Section */
@@ -416,7 +437,7 @@
             
             <!-- Top 1 Cozinha -->
             <div class="glass-panel bleed-panel">
-                <img class="bleed-image" src="https://images.unsplash.com/photo-1556910103-1c02745a872f?q=80&w=1200&auto=format&fit=crop" alt="Cozinha comercial em alto volume de operação e preparo">
+                <img class="bleed-image" src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?q=80&w=1200&auto=format&fit=crop" alt="Profissional operando na retaguarda da cozinha">
                 <div class="bleed-text">
                     <h3 class="font-poppins">#1 Jéssica Karla da Cruz</h3>
                     <p>O perfil "Mão na Massa" mais extremo e consistente da base. Apresenta uma impressionante e inquestionável estabilidade de 10 anos na mesma operação (Guga Lanche).</p>
@@ -455,7 +476,12 @@
         <footer class="footer-section">
             <h2 class="font-poppins" style="font-size: 36px; margin-bottom: 20px;">Parecer Finalizado</h2>
             <p style="font-size: 18px; max-width: 600px; margin: 0 auto;">A base de candidatos foi auditada com sucesso. Aguardamos a validação tática para iniciarmos os agendamentos das entrevistas finais (Cultural Fit).</p>
-            <div class="contact-info" style="margin-top: 40px;">
+            
+            <a href="https://drive.google.com/drive/folders/1gLvyW4ABa82KCtt3gRaPHYXKpvqk9Bvv?usp=sharing" target="_blank" class="btn-primary">
+                <i class="fa-solid fa-folder-open"></i> Acessar Currículos no Drive
+            </a>
+
+            <div class="contact-info" style="margin-top: 50px;">
                 <p class="font-poppins" style="margin-bottom: 5px;">&copy; Powered by Cléber Donato</p>
                 <a href="mailto:cleberdonato@ecossistemalive.com.br" style="color: var(--live-accent); text-decoration: none; font-weight: 600;">cleberdonato@ecossistemalive.com.br</a>
             </div>
@@ -465,4 +491,3 @@
 
 </body>
 </html>
-```
